@@ -1,14 +1,12 @@
-const { Sequelize, DataTypes } = require("sequelize");
+module.exports = (sequelize, Sequelize) => {
+  const Object = sequelize.define("object", {
+    title: {
+      type: Sequelize.STRING,
+    },
+    description: {
+      type: Sequelize.STRING,
+    },
+  });
 
-const sequelize = new Sequelize("postgres::memory:");
-const Object = sequelize.define("Object", {
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  description: {
-    type: DataTypes.STRING,
-  },
-});
-
-module.exports = Object;
+  return Object;
+};
