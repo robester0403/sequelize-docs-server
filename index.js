@@ -21,6 +21,10 @@ const main = async () => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
+  const db = require("./models");
+  db.sequelize.sync();
+
+  // ROUTES HERE
   app.use("/api/object", require("./routes/objectRoutes"));
 
   try {
