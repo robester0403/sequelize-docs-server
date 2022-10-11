@@ -3,6 +3,8 @@ const objectController = require("../controllers/objectController");
 
 const router = express.Router();
 
-router.post("/", objectController.create);
+router.get("/", objectController.findAllObject);
+router.post("/", objectController.createObject);
+router.post("/delete", objectController.deleteObject);
 
 module.exports = router;

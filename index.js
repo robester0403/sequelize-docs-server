@@ -8,6 +8,7 @@ const sequelize = new Sequelize("sequelize-server", "postgres", "123456", {
 });
 
 const PORT = process.env.PORT || 8070;
+
 const main = async () => {
   try {
     await sequelize.authenticate();
@@ -21,6 +22,10 @@ const main = async () => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
+  const db = require("./models");
+  db.sequelize.sync();
+
+  // ROUTES HERE
   app.use("/api/object", require("./routes/objectRoutes"));
 
   try {
