@@ -8,6 +8,7 @@ const sequelize = new Sequelize("sequelize-server", "postgres", "123456", {
 });
 
 const PORT = process.env.PORT || 8070;
+
 const main = async () => {
   try {
     await sequelize.authenticate();
