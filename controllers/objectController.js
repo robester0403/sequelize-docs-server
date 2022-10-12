@@ -4,7 +4,7 @@ const Object = db.object; // object model
 
 const findAllObject = async (_, res) => {
   await Object.findAll().then((data) => {
-    res.send(data);
+    res.status(200).send(data);
   });
 };
 
@@ -13,7 +13,7 @@ const createObject = async (req, res) => {
 
   try {
     await Object.create({ title, description }).then((data) => {
-      res.send(data);
+      res.status(200).send(data);
     });
   } catch (error) {
     console.error(error);
@@ -24,7 +24,7 @@ const deleteObject = async (req, res) => {
   const { id } = req.body;
 
   if (!id) {
-    res.status(404).json({ error: `We cannot find ${id} from the DB` });
+    res.status(400).json({ error: "Please provide an id" });
   }
 
   try {
@@ -34,7 +34,7 @@ const deleteObject = async (req, res) => {
       },
     }).then(res.status(200).json({ message: "you did it" })); // dont understand the use of the redirect here
   } catch (error) {
-    return res.status(400).json({ error: `Id not deleted from the DB` });
+    return res.status(500).json({ error: `Id not deleted from the DB` });
   }
   return null;
 };
