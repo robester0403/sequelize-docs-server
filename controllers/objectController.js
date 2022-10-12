@@ -62,3 +62,4 @@ const updateObject = async (req, res) => {
 exports.findAllObject = findAllObject;
 exports.createObject = createObject;
 exports.deleteObject = deleteObject;
+exports.updateObject = updateObject;
