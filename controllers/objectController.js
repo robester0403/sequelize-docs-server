@@ -34,9 +34,29 @@ const deleteObject = async (req, res) => {
       },
     }).then(res.status(200).json({ message: "you did it" })); // dont understand the use of the redirect here
   } catch (error) {
-    return res.status(500).json({ error: `Id not deleted from the DB` });
+    res.status(500).json({ error: `Id not deleted from the DB` });
   }
   return null;
+};
+
+const updateObject = async (req, res) => {
+  const { id, title, description } = req.body;
+  try {
+    await Object.update(
+      { title, description },
+      {
+        where: {
+          id: id,
+        },
+      }
+    ).then((data) => {
+      res.status(200).send(data);
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: `Failed to update object with id: ${id}.` });
+  }
 };
 
 exports.findAllObject = findAllObject;
