@@ -20,6 +20,16 @@ const createObject = async (req, res) => {
   }
 };
 
+// this will be a post route used by devs
+const createManyObjects = async (req, res) => {
+  try {
+    await Object.bulkCreate(req.body);
+    res.status(200).send(req.body);
+  } catch (error) {
+    res.status(404).json({ message: error.message, error: error });
+  }
+};
+
 const deleteObject = async (req, res) => {
   const { id } = req.body;
 
@@ -61,5 +71,6 @@ const updateObject = async (req, res) => {
 
 exports.findAllObject = findAllObject;
 exports.createObject = createObject;
+exports.createManyObjects = createManyObjects;
 exports.deleteObject = deleteObject;
 exports.updateObject = updateObject;
