@@ -1,17 +1,13 @@
 const { Sequelize } = require("sequelize"),
   express = require("express"),
-  cors = require("cors");
-
-const sequelize = new Sequelize("sequelize-server", "postgres", "123456", {
-  host: "localhost",
-  dialect: "postgres",
-});
+  cors = require("cors"),
+  db = require("./models");
 
 const PORT = process.env.PORT || 8070;
 
 const main = async () => {
   try {
-    await sequelize.authenticate();
+    await db.sequelize.authenticate();
     console.log("DB connection has been established successfully.");
   } catch (error) {
     console.error("Unable to connect to the database:", error);
@@ -22,7 +18,6 @@ const main = async () => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
-  const db = require("./models");
   db.sequelize.sync();
 
   // ROUTES HERE
